@@ -1,4 +1,5 @@
 import { ProductDatabase } from "../database/ProductDatabase"
+import { EditProductInputDTO, EditProductOutputDTO } from "../dtos/editProduct.dto"
 import { BadRequestError } from "../errors/BadRequestError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { Product, ProductDB } from "../models/Product"
@@ -86,7 +87,7 @@ export class ProductBusiness {
     return output
   }
 
-  public editProduct = async (input: any) => {
+  public editProduct = async (input: EditProductInputDTO) => {
     const {
       idToEdit,
       id,
@@ -147,7 +148,7 @@ export class ProductBusiness {
 
     await productDatabase.updateProduct(idToEdit, updatedProductDB)
 
-    const output = {
+    const output: EditProductOutputDTO = {
       message: "Produto editado com sucesso",
       product: {
         id: product.getId(),
